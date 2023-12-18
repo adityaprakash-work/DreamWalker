@@ -17,7 +17,7 @@ class ResidualBlock(nn.Module):
         super(ResidualBlock, self).__init__()
         padding = kernel_size // 2
         self.c0 = nn.Sequential(
-            nn.Conv2d(i_chan, o_chan, kernel_size=1, padding=1),
+            nn.Conv2d(i_chan, o_chan, kernel_size=1),
             nn.BatchNorm2d(o_chan),
             nn.ReLU(),
         )
@@ -36,7 +36,7 @@ class ResidualBlock(nn.Module):
         out = self.c1(xci)
         out = self.c2(out)
         out += xci
-        out = F.relu(out, inplace=True)
+        out = F.relu(out)
         return out
 
 
