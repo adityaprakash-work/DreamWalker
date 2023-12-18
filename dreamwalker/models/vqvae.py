@@ -98,7 +98,6 @@ class ResDecoder(nn.Module):
 
 
 # ---VECTOR QUANTIZER-----------------------------------------------------------
-# Vector Quantization
 class Quantizer(nn.Module):
     def __init__(self, num_emb, emb_dim, comm_cost, beta=0.25):
         super(Quantizer, self).__init__()
