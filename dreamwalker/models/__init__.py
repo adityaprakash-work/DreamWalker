@@ -1,3 +1,9 @@
-from . import brain
-from . import misc
-from . import vqvae
+# ---INFO-----------------------------------------------------------------------
+# Author: Aditya Prakash
+# Last modified: 19-12-2023
+
+# --Needed functionalities
+# - 1. None
+
+# ---DEPENDENCIES---------------------------------------------------------------
+from . import brain, misc, vqvae

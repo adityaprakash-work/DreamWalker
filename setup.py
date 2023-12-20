@@ -1,6 +1,6 @@
 # ---INFO-----------------------------------------------------------------------
 # Author: Aditya Prakash
-# Last edited: 18-12-2023
+# Last edited: 19-12-2023
 
 # ---DEPENDENCIES---------------------------------------------------------------
 from setuptools import setup, find_packages
@@ -12,8 +12,8 @@ URL = "https://github.com/adityaprakash-work/DreamWalker.git"
 EMAIL = "adityaprakash.work@gmail.com"
 AUTHOR = "Aditya Prakash"
 REQUIRES_PYTHON = ">=3.9.0"
-VERSION = "0.5.0"
-REQUIRED = ["tqdm", "torch", "torchvision"]
+VERSION = "0.1.0"
+REQUIRED = ["opendatasets", "tqdm", "torch", "torchvision"]
 EXTRAS = {}
 
 # ---SETUP DREAMWALKER----------------------------------------------------------
