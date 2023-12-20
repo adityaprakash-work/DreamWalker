@@ -298,7 +298,7 @@ class VQVAETrainer:
 
 # ---PLOTTING-------------------------------------------------------------------
 def plot_vqvae_forward(data, z_e, z_q, recon):
-    # clip data
+    # Clip data
     data = torch.clamp(data, 0, 1)
     recon = torch.clamp(recon, 0, 1)
     data_grid = make_grid(data.cpu().detach(), nrow=8)
