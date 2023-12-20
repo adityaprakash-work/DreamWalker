@@ -39,7 +39,7 @@ class ImageStream(Dataset):
     def __getitem__(self, idx):
         img = Image.open(self.files[idx])
         img = self.transform(img)
-        return img, None  # None for compatibility with other datasets
+        return img, 0  # 0 for compatibility with other datasets
 
 
 # ---DATALOADERS----------------------------------------------------------------
