@@ -206,6 +206,8 @@ class VQVAETrainer:
         self.valid_loader = valid_loader
         self.device = device
 
+        self.model = self.model.to(self.device)
+
     def save_checkpoint(self, path):
         torch.save(
             {

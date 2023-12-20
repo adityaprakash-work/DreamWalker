@@ -31,7 +31,7 @@ class ImageStream(Dataset):
     def __init__(self, dir, ext="jpg", transform=default_transform()):
         self.dir = dir
         self.transform = transform
-        pattern = os.path.join(self.dir, "**", "." + ext)
+        pattern = os.path.join(self.dir, "**", "*." + ext)
         self.files = glob.glob(pattern, recursive=True)
 
     def __len__(self):
@@ -46,7 +46,7 @@ class ImageStream(Dataset):
 # ---DATALOADERS----------------------------------------------------------------
 def get_loaders(
     dataset,
-    batch_size=32,
+    batch_size=16,
     num_workers=4,
     shuffle=True,
     pin_memory=True,
