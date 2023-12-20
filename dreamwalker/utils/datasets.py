@@ -8,9 +8,8 @@
 # ---DEPENDENCIES---------------------------------------------------------------
 import os
 import glob
-import cv2
 from opendatasets import download
-
+from PIL import Image
 from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 
@@ -38,8 +37,7 @@ class ImageStream(Dataset):
         return len(self.files)
 
     def __getitem__(self, idx):
-        img = cv2.imread(self.files[idx])
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = Image.open(self.files[idx])
         img = self.transform(img)
         return img, 0  # 0 for compatibility with other datasets, [label]
 

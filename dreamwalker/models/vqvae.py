@@ -270,7 +270,8 @@ class VQVAETrainer:
                         if log[m] is not None
                         else mval / len(loader)
                     )
-            pbar.set_postfix(log)
+            l = {k: (v * len(loader)) / (batch_idx + 1) for k, v in log.items()}
+            pbar.set_postfix(l)
 
         return log, (data, z_e, z_q, recon)
 
@@ -297,9 +298,11 @@ class VQVAETrainer:
 
 # ---PLOTTING-------------------------------------------------------------------
 def plot_vqvae_forward(data, z_e, z_q, recon):
+    # clip data
+    data = torch.clamp(data, 0, 1)
+    recon = torch.clamp(recon, 0, 1)
     data_grid = make_grid(data.cpu().detach(), nrow=8)
     recon_grid = make_grid(recon.cpu().detach(), nrow=8)
-    recon_grid = (recon_grid - recon_grid.min()) / (recon_grid.max() - recon_grid.min())
 
     fig, ax = plt.subplots(2, 2, figsize=(10, 10))
     ax[0, 0].imshow(data_grid.permute(1, 2, 0))
