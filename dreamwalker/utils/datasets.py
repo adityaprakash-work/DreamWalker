@@ -39,24 +39,20 @@ class ImageStream(Dataset):
     def __getitem__(self, idx):
         img = Image.open(self.files[idx])
         img = self.transform(img)
-        return img, 0  # 0 for compatibility with other datasets
+        return img, 0  # 0 for compatibility with other datasets, [label]
 
 
 # ---DATALOADERS----------------------------------------------------------------
-def get_imagestream_loaders(
-    dir,
-    ext="jpg",
+def get_loaders(
+    dataset,
     batch_size=32,
     num_workers=4,
     shuffle=True,
     pin_memory=True,
     drop_last=True,
-    transform=default_transform(),
     return_valid=False,
     valid_split=0.2,
 ):
-    dataset = ImageStream(dir, ext, transform)
-
     if return_valid:
         vsize = int(valid_split * len(dataset))
         tsize = len(dataset) - vsize

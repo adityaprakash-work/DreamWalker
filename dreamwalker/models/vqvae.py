@@ -183,10 +183,12 @@ class VQVAETrainer:
         valid_loader=None,
         metrics=None,
         device=None,
-        load_checkpoint=None,
+        load_checkpoint_path=None,
     ):
-        if load_checkpoint is not None:
-            self.model, self.optimizer, self.prev_logs = self.load_checkpoint()
+        if load_checkpoint_path is not None:
+            self.model, self.optimizer, self.prev_logs = self.load_checkpoint(
+                load_checkpoint_path
+            )
         else:
             self.model = model
             self.optimizer = optimizer
