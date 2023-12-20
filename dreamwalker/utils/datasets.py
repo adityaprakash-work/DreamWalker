@@ -38,7 +38,10 @@ class ImageStream(Dataset):
 
     def __getitem__(self, idx):
         img = Image.open(self.files[idx])
+        if img.mode != "RGB":
+            img = img.convert("RGB")
         img = self.transform(img)
+
         return img, 0  # 0 for compatibility with other datasets, [label]
 
 
