@@ -31,7 +31,8 @@ class ImageStream(Dataset):
     def __init__(self, dir, ext="jpg", transform=default_transform()):
         self.dir = dir
         self.transform = transform
-        self.files = glob.glob(os.path.join(self.dir, "*." + ext))
+        pattern = os.path.join(self.dir, "**", "." + ext)
+        self.files = glob.glob(pattern, recursive=True)
 
     def __len__(self):
         return len(self.files)
