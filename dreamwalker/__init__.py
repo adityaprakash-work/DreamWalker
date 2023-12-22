@@ -7,3 +7,4 @@
 
 # ---DEPENDENCIES---------------------------------------------------------------
 from . import models, utils
+from . import pytorch_generative as pg

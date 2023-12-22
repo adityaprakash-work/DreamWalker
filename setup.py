@@ -29,8 +29,8 @@ REQUIRED = [
 # of nascency. It's hosted on GitHub, but doesn't have a setup.py file. There
 # is a requirements.txt file however, added in 'REQUIRED'.
 
-pytorch_generative_url = "https://github.com/EugenHotaj/pytorch-generative.git"
-REQUIRED += ["git+pytorch_generative_url@master#egg=pytorch_generative"]
+# pytorch_generative_url = "https://github.com/EugenHotaj/pytorch-generative.git"
+# REQUIRED += ["git+pytorch_generative_url@master#egg=pytorch_generative"]
 
 EXTRAS = {}
 

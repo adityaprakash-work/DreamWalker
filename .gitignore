@@ -1,4 +1,5 @@
 /.vscode
-/.literature
+/.literature/*
+/.notebooks/logs
 **/__pycache__/*
 
