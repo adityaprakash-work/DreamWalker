@@ -13,11 +13,21 @@ EMAIL = "adityaprakash.work@gmail.com"
 AUTHOR = "Aditya Prakash"
 REQUIRES_PYTHON = ">=3.9.0"
 VERSION = "0.1.0"
-REQUIRED = ["opendatasets", "tqdm", "torch", "torchvision", "mne"]
+REQUIRED = [
+    "opendatasets",
+    "tqdm",
+    "torch",
+    "torchvision",
+    "mne",
+    "numpy",
+    "Pillow",
+    "tensorboard",
+    "scikit-learn",
+]
 
-# pytorch-generative is being provided internally until this package is in its
-# nascent stage. It's hosted on GitHub, but doesn't have a setup.py file. There
-# is a requirements.txt file, we use it to install the package.
+# pytorch-generative is being provided internally until this package comes out
+# of nascency. It's hosted on GitHub, but doesn't have a setup.py file. There
+# is a requirements.txt file however, added in 'REQUIRED'.
 
 pytorch_generative_url = "https://github.com/EugenHotaj/pytorch-generative.git"
 REQUIRED += ["git+pytorch_generative_url@master#egg=pytorch_generative"]
