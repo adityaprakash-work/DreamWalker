@@ -12,44 +12,53 @@ import torch.nn.functional as F
 
 # ---RESIDUAL NETWORKS----------------------------------------------------------
 class ResidualBlock(nn.Module):
-    def __init__(self, i_chan, o_chan, kernel_size=3):
-        super(ResidualBlock, self).__init__()
-        padding = kernel_size // 2
-        self.c0 = nn.Sequential(
-            nn.Conv2d(i_chan, o_chan, kernel_size=1),
-            nn.BatchNorm2d(o_chan),
+    """A simple residual block."""
+
+    def __init__(self, n_channels, hidden_channels):
+        """Initializes a new ResidualBlock instance.
+
+        Args:
+            n_channels: Number of input and output channels.
+            hidden_channels: Number of hidden channels.
+        """
+        super().__init__()
+        self._net = nn.Sequential(
             nn.ReLU(),
-        )
-        self.c1 = nn.Sequential(
-            nn.Conv2d(o_chan, o_chan, kernel_size, padding=padding),
-            nn.BatchNorm2d(o_chan),
+            nn.Conv2d(
+                in_channels=n_channels,
+                out_channels=hidden_channels,
+                kernel_size=3,
+                padding=1,
+            ),
             nn.ReLU(),
-        )
-        self.c2 = nn.Sequential(
-            nn.Conv2d(o_chan, o_chan, kernel_size, padding=padding),
-            nn.BatchNorm2d(o_chan),
+            nn.Conv2d(
+                in_channels=hidden_channels, out_channels=n_channels, kernel_size=1
+            ),
         )
 
     def forward(self, x):
-        xci = self.c0(x)
-        out = self.c1(xci)
-        out = self.c2(out)
-        out += xci
-        out = F.relu(out)
-        return out
+        return x + self._net(x)
 
 
 class ResidualStack(nn.Module):
-    def __init__(self, i_chan, o_chan, kernel_size=3, num_blocks=3):
-        super(ResidualStack, self).__init__()
-        self.stack = nn.ModuleList()
-        for b in range(num_blocks):
-            i_chan = o_chan if b > 0 else i_chan
-            self.stack.append(ResidualBlock(i_chan, o_chan, kernel_size))
-        self.stack = nn.Sequential(*self.stack)
+    """A stack of multiple ResidualBlocks."""
+
+    def __init__(self, n_channels, hidden_channels, n_residual_blocks=1):
+        """Initializes a new ResidualStack instance.
+
+        Args:
+            n_channels: Number of input and output channels.
+            hidden_channels: Number of hidden channels.
+            n_residual_blocks: Number of residual blocks in the stack.
+        """
+        super().__init__()
+        self._net = nn.Sequential(
+            *[
+                ResidualBlock(n_channels, hidden_channels)
+                for _ in range(n_residual_blocks)
+            ]
+            + [nn.ReLU()]
+        )
 
     def forward(self, x):
-        return self.stack(x)
-
-
-# ---END------------------------------------------------------------------------
+        return self._net(x)
