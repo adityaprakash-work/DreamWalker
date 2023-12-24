@@ -274,7 +274,9 @@ class Trainer:
             for batch in self.eval_loader:
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                n_batch_examples = x.shape[0]
+                n_batch_examples = (
+                    x.shape[0] if isinstance(x, torch.Tensor) else x[0].shape[0]
+                )
                 n_examples += n_batch_examples
                 for key, metric in self._eval_one_batch(x, y).items():
                     sum_metrics[key] += metric * n_batch_examples
