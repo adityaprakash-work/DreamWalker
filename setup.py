@@ -12,7 +12,7 @@ URL = "https://github.com/adityaprakash-work/DreamWalker.git"
 EMAIL = "adityaprakash.work@gmail.com"
 AUTHOR = "Aditya Prakash"
 REQUIRES_PYTHON = ">=3.9.0"
-VERSION = "0.1.0"
+VERSION = "1.0.0"
 REQUIRED = [
     "opendatasets",
     "tqdm",
@@ -23,6 +23,7 @@ REQUIRED = [
     "Pillow",
     "tensorboard",
     "scikit-learn",
+    "torcheeg",
 ]
 
 # pytorch-generative is being provided internally until this package comes out
