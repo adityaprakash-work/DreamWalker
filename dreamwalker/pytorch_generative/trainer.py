@@ -242,7 +242,9 @@ class Trainer:
             for i, batch in enumerate(self.train_loader):
                 batch = batch if isinstance(batch, (tuple, list)) else (batch, None)
                 x, y = batch
-                self._examples_processed += x.shape[0]
+                self._examples_processed += (
+                    x.shape[0] if isinstance(x, torch.Tensor) else x[0].shape[0]
+                )
                 lrs = {
                     f"group_{i}": param["lr"]
                     for i, param in enumerate(self.optimizer.param_groups)
